@@ -12,33 +12,77 @@
     android:background="@color/white">
 
     <TextView
+        android:id="@+id/t1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SMART BLIND STICK"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center_horizontal"
+        android:text="SMART BLIND\nSTICK"
         android:textColor="#C12222"
-        android:textStyle="italic"
-        android:typeface="sans"
-        android:textSize="43dp"
-        android:layout_margin="10dp"/>
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <ImageView
         android:id="@+id/main_img_1"
-        android:layout_width="389dp"
-        android:layout_height="461dp"
+        android:layout_width="398dp"
+        android:layout_height="448dp"
         app:srcCompat="@drawable/idea4" />
 
-    <Button
-        android:id="@+id/main_b1"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find NOW !"
-        android:textSize="20dp" />
-    <Button
-        android:id="@+id/main_b2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NEXT"
-        android:textSize="20dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:stretchColumns="*"
+        android:shrinkColumns="*">
 
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Go to setting"
+                android:gravity="center_horizontal"
+                android:textColor="#C12222"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                android:layout_column="0"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find the stick"
+                android:gravity="center_horizontal"
+                android:textColor="#C12222"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                android:layout_column="2"/>
 
+        </TableRow>
+        <TableRow>
+
+            <ImageButton
+                android:id="@+id/main_b1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/idea15" />
+
+            <ImageButton
+                android:id="@+id/main_b2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_column="2"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="150dp"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/idea16" />
+        </TableRow>
+    </TableLayout>
 </LinearLayout>
