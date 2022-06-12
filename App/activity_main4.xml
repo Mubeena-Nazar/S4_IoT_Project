@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foregroundTint="#03A9F4"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:text="Configuration"
+            android:textSize="35dp" />
+
+
+        <ImageView
+            android:id="@+id/config_img_1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/idea11" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detection : "
+                    android:textColor="@color/purple_700"
+                    android:textSize="20dp" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints">
+                    <GridLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:columnCount="2"
+                        android:rowCount="3"
+                        android:orientation="horizontal"
+                        android:useDefaultMargins="false"
+                        android:layout_weight="70">
+
+                        <RadioButton
+                            android:id="@+id/config_r1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Obstacle Detection"
+                            android:onClick="radioHandle"/>
+
+                        <RadioButton
+                            android:id="@+id/config_r2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Staircase Detection"
+                            android:onClick="radioHandle"/>
+
+                        <RadioButton
+                            android:id="@+id/config_r3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pothole Detection"
+                            android:onClick="radioHandle"/>
+
+
+                        <RadioButton
+                            android:id="@+id/config_r4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Water Detection"
+                            android:onClick="radioHandle"/>
+
+
+                        <RadioButton
+                            android:id="@+id/config_r5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fire Detection"
+                            android:onClick="radioHandle"/>
+
+                    </GridLayout>
+                </RadioGroup>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sound : "
+                    android:textColor="@color/purple_700"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/config_e1"
+                    android:layout_width="188dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:text="waterbeep.mp3" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distance : "
+                    android:textColor="@color/purple_700"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/config_e2"
+                    android:layout_width="188dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:text="10 cm" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/config_b1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="CONFIRM"
+                    android:textSize="13dp" />
+
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+</LinearLayout>
