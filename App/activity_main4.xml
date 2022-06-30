@@ -4,143 +4,187 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
     android:foregroundTint="#03A9F4"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
             android:gravity="center_horizontal"
+            android:textColor="#C12222"
             android:text="Configuration"
-            android:textSize="35dp" />
+            android:textSize="25dp" />
 
 
-        <ImageView
-            android:id="@+id/config_img_1"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/idea11" />
+    <ImageView
+        android:id="@+id/config_img_1"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/idea11" />
 
-        <TableLayout
-            android:layout_width="match_parent"
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center_horizontal">
+
+        <TableRow
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Obstacle "
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
+            android:textSize="15dp" />
 
-            <TableRow
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:text="Sound  "
+                android:textColor="@color/purple_700"
+                android:textSize="15dp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Detection : "
-                    android:textColor="@color/purple_700"
-                    android:textSize="20dp" />
+            <RadioButton
+                android:id="@+id/config_r1"
+                android:textColor="@color/purple_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obstacle Detection"
+                android:textSize="12dp"
+                android:checked="true"
+                android:onClick="radioHandle"/>
+
+            <RadioButton
+                android:id="@+id/config_r2"
+                android:textColor="@color/purple_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Staircase Detection"
+                android:textSize="12dp"
+                android:onClick="radioHandle"/>
+
+            <RadioButton
+                android:id="@+id/config_r3"
+                android:textColor="@color/purple_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pothole Detection"
+                android:textSize="12dp"
+                android:onClick="radioHandle"/>
+
+
+            <RadioButton
+                android:id="@+id/config_r4"
+                android:textColor="@color/purple_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Water Detection"
+                android:textSize="12dp"
+                android:onClick="radioHandle"/>
+
+            <RadioButton
+                android:id="@+id/config_r5"
+                android:textColor="@color/purple_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fire Detection"
+                android:textSize="12dp"
+                android:onClick="radioHandle"/>
+        </RadioGroup>
 
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:ignore="MissingConstraints">
-                    <GridLayout
+                    tools:ignore="MissingConstraints"
+                    android:layout_gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/config_s1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:columnCount="2"
-                        android:rowCount="3"
-                        android:orientation="horizontal"
-                        android:useDefaultMargins="false"
-                        android:layout_weight="70">
+                        android:checked="true"
+                        android:onClick="radioHandle"
+                        android:text="Song 1 "
+                        android:textColor="@color/purple_700"
+                        android:textSize="12dp" />
 
-                        <RadioButton
-                            android:id="@+id/config_r1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Obstacle Detection"
-                            android:onClick="radioHandle"/>
+                    <RadioButton
+                        android:id="@+id/config_s2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="radioHandle"
+                        android:text="Song 2 "
+                        android:textColor="@color/purple_700"
+                        android:textSize="12dp" />
 
-                        <RadioButton
-                            android:id="@+id/config_r2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Staircase Detection"
-                            android:onClick="radioHandle"/>
-
-                        <RadioButton
-                            android:id="@+id/config_r3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pothole Detection"
-                            android:onClick="radioHandle"/>
+                    <RadioButton
+                        android:id="@+id/config_s3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="radioHandle"
+                        android:text="Song 3 "
+                        android:textColor="@color/purple_700"
+                        android:textSize="12dp" />
 
 
-                        <RadioButton
-                            android:id="@+id/config_r4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Water Detection"
-                            android:onClick="radioHandle"/>
+                    <RadioButton
+                        android:id="@+id/config_s4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="radioHandle"
+                        android:text="Song 4 "
+                        android:textColor="@color/purple_700"
+                        android:textSize="12dp" />
 
-
-                        <RadioButton
-                            android:id="@+id/config_r5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Fire Detection"
-                            android:onClick="radioHandle"/>
-
-                    </GridLayout>
+                    <RadioButton
+                        android:id="@+id/config_s5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="radioHandle"
+                        android:text="Song 5 "
+                        android:textColor="@color/purple_700"
+                        android:textSize="12dp" />
                 </RadioGroup>
-
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sound : "
+                    android:text="Distance  "
+                    android:textStyle="bold"
                     android:textColor="@color/purple_700"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/config_e1"
-                    android:layout_width="188dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:text="waterbeep.mp3" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Distance : "
-                    android:textColor="@color/purple_700"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/config_e2"
+                    android:textColor="@color/purple_700"
                     android:layout_width="188dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:textSize="15dp"
                     android:text="10 cm" />
 
             </TableRow>
@@ -148,19 +192,18 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/config_b1"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="CONFIRM"
-                    android:textSize="13dp" />
+                    android:textSize="12dp" />
 
             </TableRow>
 
         </TableLayout>
-    </LinearLayout>
 </LinearLayout>
