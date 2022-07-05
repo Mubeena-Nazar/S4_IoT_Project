@@ -1,0 +1,143 @@
+void loop() {
+  // Clears the trigPin_1
+  digitalWrite(trigPin_1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin_1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin_1, LOW);
+  duration1= pulseIn(echoPin_1, HIGH);
+
+
+  digitalWrite(trigPin_2, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin_2, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin_2, LOW);
+  duration2 = pulseIn(echoPin_2, HIGH);
+
+  digitalWrite(trigPin_3, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin_3, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin_3, LOW);
+  duration3 = pulseIn(echoPin_3, HIGH);
+
+
+  
+
+//--------------------- DISTANCE CALCULATIONS -----------------------------
+  distanceCm1 = duration1 * SOUND_SPEED/2;
+  distanceCm2 = duration2 * SOUND_SPEED/2;
+  distanceCm3 = duration3 * SOUND_SPEED/2;
+
+  
+  if(distanceCm1 < mid_distance_threshold_obstacle){
+    if(flag1==0){
+      song1();
+    }
+    sound_check();
+  }
+  if(distanceCm2 < mid_distance_threshold_staircase){
+    if(flag2==0){
+      song2();
+    }
+    sound_check();
+  }
+  if(distanceCm3 < mid_distance_threshold_pothole){
+    if(flag3==0){
+      song3();
+    }
+    sound_check();
+  } 
+
+//--------------------- WATER CALCULATIONS -----------------------------
+ moisture_sensor_value = analogRead(moisture_sensor_pin);
+ if(moisture_sensor_value < mid_distance_threshold_water ){
+    if(flag4==0){
+      song4();
+    }
+    sound_check();
+  }
+
+//--------------------- FIRE CALCULATIONS -----------------------------
+  gas_sensor_value = analogRead(gas_sensor_pin);
+  if(gas_sensor_value < mid_distance_threshold_fire ){
+    if(flag5==0){
+      song5();
+    }
+    sound_check();
+  }
+
+
+//--------------------- TELEGRAM MESSAGE PASSING -----------------------------
+ if (millis() - previousMillisTelegram >= 1000) {
+    previousMillisTelegram = millis();
+    int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+    while (numNewMessages) {
+      Serial.println("got response");
+      handleNewMessages(numNewMessages);
+      numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+    }
+ }
+
+ 
+//-------------------  TELEGRAM MSG ON BUTTON PRESS ------------------------  
+  BUTTONstate = digitalRead(BUTTON);
+  if (BUTTONstate == 1)
+  {
+    
+    Serial.println("Button Pressed ");
+    Serial.print(BUTTONstate);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    buttonPressed();    
+    BUTTONstate == 0;
+    
+  } 
+  else{
+    digitalWrite(LED_BUILTIN, LOW);
+    //Serial.print("Low: ");
+  }
+BUTTONstate == 0;
+
+
+
+
+  
+//------------ PRINITNG ON SERIAL MONITOR --------------------
+
+  Serial.print("\n-----------  READINGS ARE ----------\n");
+  Serial.print("Distance1 (cm): ");
+  Serial.println(distanceCm1);
+  Serial.print("Distance2 (cm): ");
+  Serial.println(distanceCm2);
+  Serial.print("Distance3 (cm): ");
+  Serial.println(distanceCm3);
+  Serial.print("Water sensor  : ");
+  Serial.println(moisture_sensor_value);
+  Serial.print("Fire  sensor  : ");
+  Serial.println(gas_sensor_value);
+  delay(1500);
+
+  Serial.print("\n------  THRESHOLD VALUES ARE --------\n");
+  
+  Serial.print("Obstacle Detection: ");
+  Serial.println(mid_distance_threshold_obstacle);
+  
+  Serial.print("Staircase Detection: ");
+  Serial.println(mid_distance_threshold_staircase);
+  
+  Serial.print("Pothole Detection: ");
+  Serial.println(mid_distance_threshold_pothole);
+  
+  Serial.print("Water Detection: ");
+  Serial.println(mid_distance_threshold_water);
+  
+  Serial.print("Fire Detection: ");
+  Serial.println(mid_distance_threshold_fire);
+
+  Serial.print("\n");
+  delay(1500);
+ 
+}
