@@ -1,0 +1,293 @@
+#include <WiFi.h>
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <WiFiClientSecure.h>
+#include <UniversalTelegramBot.h>
+#include <ArduinoJson.h>
+#include "SPIFFS.h"
+
+
+//#define WIFI_SSID "Nokanda Unni Ithu Njan Alla"
+//#define WIFI_PASSWORD "thankyouchinnu"
+#define WIFI_SSID "Fiber Connection"
+#define WIFI_PASSWORD "Siyadar5"
+//#define WIFI_SSID "projectlab"
+//#define WIFI_PASSWORD "project@123"
+
+
+#define BOT_TOKEN "5331694406:AAG-mEcOClVekPk2GB8BOGfZPnJXe_vVAEo"
+#define CHAT_ID_Tele "1304506150"
+//String CHAT_ID_Tele =  "1304506150";
+#define SOUND_SPEED 0.034
+
+
+
+// files operations
+void logfile_setup();
+void listDir(fs::FS &fs, const char * dirname, uint8_t levels);
+void writeFileStr(fs::FS &fs, String path, String text);
+String readFile(fs::FS &fs, String path);
+
+
+
+//--------- PIN NUMBERS and CONSTANTS ------------------
+int LED_BUILTIN = 2;
+
+
+//ultrasonic sensor
+const int trigPin_1 = 5;
+const int echoPin_1 = 19;
+const int trigPin_2 = 4;
+const int echoPin_2 = 18;
+const int trigPin_3 = 15;
+const int echoPin_3 = 21;
+
+int mid_distance_threshold_obstacle = 15;
+int mid_distance_threshold_staircase = 15;
+int mid_distance_threshold_pothole = 15;
+int mid_distance_threshold_water = 3600;
+int mid_distance_threshold_fire = 400;
+
+
+//water sensor
+const int moisture_sensor_pin = 34;
+int moisture_sensor_value = 0;
+
+//fire sensor
+const int gas_sensor_pin = 35;
+int gas_sensor_value = 0;
+
+//define sound speed in cm/uS
+
+long duration1, duration2, duration3;
+long distance1, distance2, distance3;
+float distanceCm1, distanceCm2, distanceCm3;
+float distanceInch1, distanceInch2, distanceInch3;
+int flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;
+
+
+//telegram message
+WiFiClientSecure secured_client;
+UniversalTelegramBot bot(BOT_TOKEN, secured_client);
+long previousMillisTelegram = 0;
+String n, num_str;
+String msg = "I am in need of Help";
+int num;
+const int BUTTON = 23;
+int BUTTONstate = 0;
+
+
+
+//------------------- STORAGE OF VALUES -----------------------------------
+// files
+String mdt_obstacle_file = "/obstacle.txt";
+String mdt_staircase_file = "/staircase.txt";
+String mdt_pothole_file = "/pothole.txt";
+String mdt_water_file = "/water.txt";
+String mdt_fire_file = "/fire.txt";
+
+
+
+void threshold_setup_log() {
+
+   //obstacle
+  String names_obstacle = "";
+  names_obstacle  = readFile(SPIFFS, mdt_obstacle_file);
+  if (names_obstacle  != "") {
+    mid_distance_threshold_obstacle = names_obstacle.toInt();
+    Serial.println(mid_distance_threshold_obstacle);
+  }
+
+  //Staircase
+  String names_staircase = "";
+  names_staircase  = readFile(SPIFFS, mdt_staircase_file);
+  if (names_staircase  != "") {
+    mid_distance_threshold_staircase = names_staircase.toInt();
+    Serial.println(mid_distance_threshold_staircase);
+  }
+
+    //Staircase
+  String names_pothole = "";
+  names_pothole  = readFile(SPIFFS, mdt_pothole_file);
+  if (names_staircase  != "") {
+    mid_distance_threshold_pothole = names_pothole.toInt();
+    Serial.println(mid_distance_threshold_pothole);
+  }
+
+    //Staircase
+  String names_water = "";
+  names_water = readFile(SPIFFS, mdt_water_file);
+  if (names_water != "") {
+    mid_distance_threshold_water  = names_water.toInt();
+    Serial.println(mid_distance_threshold_water);
+  }
+
+    //Staircase
+  String names_fire = "";
+  names_fire  = readFile(SPIFFS, mdt_fire_file);
+  if (names_fire != "") {
+    mid_distance_threshold_fire = names_fire.toInt();
+    Serial.println(mid_distance_threshold_fire);
+  }
+}
+
+
+
+//-------------------- FUNCTIONS--------------------------
+void song1() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song2() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song3() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song4() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song5() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song_on() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+}
+void song_off() {
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void sound_check() {
+  if (flag1 == 1) {
+    song1();
+  }
+  if (flag2 == 1) {
+    song2();
+  }
+  if (flag3 == 1) {
+    song3();
+  }
+  if (flag4 == 1) {
+    song4();
+  }
+  if (flag5 == 1) {
+    song5();
+  }
+}
+
+//telegram msg
+void handleNewMessages(int numNewMessages) {
+  Serial.println("handleNewMessages");
+  Serial.println(String(numNewMessages));
+
+  for (int i = 0; i < numNewMessages; i++)  {
+    String chat_id = bot.messages[i].chat_id;
+    String text = bot.messages[i].text;
+
+    if (text == "/start")    {
+      String reply = "Telegram Get Chat ID: " + chat_id + "\n";
+      reply += "/getid - Chat ID\n";
+      reply += "/location - Get Current Location\n";
+      reply += "/reset - Reset Distance to 9\n";
+      bot.sendMessage(chat_id, reply);
+    }
+    if (text == "/getid") {
+      String reply = "Your Chat ID: " + chat_id + "\n";
+      bot.sendMessage(chat_id, reply);
+    }
+    if (text == "/location") {
+      String reply = "Location\n";
+      reply += "Latitude: 1.12345\n";
+      reply += "Longitude: 124.122315\n";
+      bot.sendMessage(chat_id, reply);
+    }
+    if (text == "/reset") {
+      String reply = "Resetting...\n";
+      bot.sendMessage(chat_id, reply);
+    }
+
+  }
+}
+void buttonPressed() {
+  Serial.println("Telegram Message Sending");
+  String reply = msg;
+  bot.sendMessage(CHAT_ID_Tele, reply);
+  Serial.println("Telegram Message Sent");
+  //reply += "Lat:" + Latitude + "\n";
+  //reply += "Lon:" + Longitude + "\n";
+
+}
+
+
+
+
+
+//------------------ HTTP Request ----------------------
+AsyncWebServer server(80);
+
+const char index_html[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+
+String processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String buttons = "<h2>ok</h2>";
+    return buttons;
+  }
+  return String();
+}
+
+const char obstacles[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+
+String obstacles_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data1 = String(mid_distance_threshold_obstacle);
+    return data1;
+  }
+  return String();
+}
+
+
+
+
+//--------------- static IP ADDRESS -------------
+IPAddress local_IP(192, 168, 1, 5);
+// Set your Gateway IP address
+IPAddress gateway(192, 168, 1, 1);
+
+IPAddress subnet(255, 255, 0, 0);
+IPAddress primaryDNS(8, 8, 8, 8);   //optional
+IPAddress secondaryDNS(8, 8, 4, 4); //optional
