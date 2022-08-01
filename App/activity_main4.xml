@@ -7,19 +7,20 @@
     android:layout_marginLeft="5dp"
     android:foregroundTint="#03A9F4"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    android:exported="true"
+    tools:context=".MainActivity4"
     android:background="@color/white">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="5dp"
-        android:layout_margin="10dp"
         android:gravity="center_horizontal"
-        android:textColor="#C12222"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="serif"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="#C12222"
         android:text="Configuration"
         android:textSize="30dp" />
 
@@ -28,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/idea11" />
+        app:srcCompat="@drawable/idea4" />
 
 
     <TableLayout
@@ -44,57 +45,57 @@
             android:layout_gravity="center_horizontal"
             >
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/config_r1"
+            <RadioGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:onClick="radioHandle"
-                android:text="Obstacle Detection"
-                android:textColor="@color/purple_700"
-                android:textSize="15dp" />
+                android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/config_r2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="radioHandle"
-                android:text="Staircase Detection"
-                android:textColor="@color/purple_700"
-                android:textSize="15dp" />
+                <RadioButton
+                    android:id="@+id/config_r1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="radioHandle"
+                    android:text="Obstacle Detection"
+                    android:textColor="@color/purple_700"
+                    android:textSize="15dp" />
 
-            <RadioButton
-                android:id="@+id/config_r3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="radioHandle"
-                android:text="Pothole Detection"
-                android:textColor="@color/purple_700"
-                android:textSize="15dp" />
+                <RadioButton
+                    android:id="@+id/config_r2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Staircase Detection"
+                    android:textColor="@color/purple_700"
+                    android:textSize="15dp" />
+
+                <RadioButton
+                    android:id="@+id/config_r3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Pothole Detection"
+                    android:textColor="@color/purple_700"
+                    android:textSize="15dp" />
 
 
-            <RadioButton
-                android:id="@+id/config_r4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="radioHandle"
-                android:text="Water Detection"
-                android:textColor="@color/purple_700"
-                android:textSize="15dp" />
+                <RadioButton
+                    android:id="@+id/config_r4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Water Detection"
+                    android:textColor="@color/purple_700"
+                    android:textSize="15dp" />
 
-            <RadioButton
-                android:id="@+id/config_r5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="radioHandle"
-                android:text="Fire Detection"
-                android:textColor="@color/purple_700"
-                android:textSize="15dp" />
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/config_r5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Fire Detection"
+                    android:textColor="@color/purple_700"
+                    android:textSize="15dp" />
+            </RadioGroup>
 
         </TableRow>
         <TableRow
@@ -107,10 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="CONFIRM"
+                android:text="NEXT"
                 android:textColor="@color/white"
                 android:textSize="12dp" />
-
         </TableRow>
 
     </TableLayout>
