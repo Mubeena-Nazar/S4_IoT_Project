@@ -1,0 +1,131 @@
+
+//-------------------- FUNCTIONS--------------------------
+void song1() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song2() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song3() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song4() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song5() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void song_on() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+}
+void song_off() {
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+}
+void sound_check() {
+  if (flag1 == 1) {
+    song1();
+  }
+  if (flag2 == 1) {
+    song2();
+  }
+  if (flag3 == 1) {
+    song3();
+  }
+  if (flag4 == 1) {
+    song4();
+  }
+  if (flag5 == 1) {
+    song5();
+  }
+}
+
+
+
+//----------------- OBSTCALE VALUE PASSING --------------------
+String obstacles_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data1 = String(mid_distance_threshold_obstacle)+" "+song_obstacle;
+    return data1;
+  }
+  return String();
+}
+
+//----------------- STAIRCASE VALUE PASSING --------------------
+String staircase_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data2 = String(mid_distance_threshold_staircase)+" "+song_staircase;
+    return data2;
+  }
+  return String();
+}
+
+//----------------- POTHOLE VALUE PASSING --------------------
+
+String pothole_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data3 = String(mid_distance_threshold_pothole)+" "+song_pothole;
+    return data3;
+  }
+  return String();
+}
+
+//----------------- WATER VALUE PASSING --------------------
+String water_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data4 = String(mid_distance_threshold_water)+" "+song_water;
+    return data4;
+  }
+  return String();
+}
+
+//----------------- FIRE VALUE PASSING --------------------
+String fire_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data5 = String(mid_distance_threshold_fire)+" "+song_fire;
+    return data5;
+  }
+  return String();
+}
+
+
+//----------------- TELEGRAM MESSAGE VALUE PASSING --------------------
+String telegram_msg_processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String data6 = n+" # "+msg+" # "+tele_id;
+    return data6;
+  }
+  return String();
+}
