@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:fontFamily="@font/aclonica"
+        android:fontFamily="@font/metamorphous"
         android:gravity="center_horizontal"
         android:text="SMART BLIND\nSTICK"
         android:textColor="#C12222"
@@ -26,9 +26,9 @@
 
     <ImageView
         android:id="@+id/main_img_1"
-        android:layout_width="398dp"
-        android:layout_height="448dp"
-        app:srcCompat="@drawable/idea4" />
+        android:layout_width="400dp"
+        android:layout_height="337dp"
+        app:srcCompat="@drawable/idea1" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@color/white"
                 android:scaleType="fitCenter"
-                android:src="@drawable/idea15" />
+                android:src="@drawable/idea1_2" />
 
             <ImageButton
                 android:id="@+id/main_b2"
@@ -82,7 +82,7 @@
                 android:layout_marginLeft="150dp"
                 android:background="@color/white"
                 android:scaleType="fitCenter"
-                android:src="@drawable/idea16" />
+                android:src="@drawable/idea1_3" />
         </TableRow>
     </TableLayout>
 </LinearLayout>
