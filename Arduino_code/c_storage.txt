@@ -1,0 +1,120 @@
+
+//------------------- STORAGE OF VALUES -----------------------------------
+
+String mdt_obstacle_file = "/obstacle.txt";
+String mdt_staircase_file = "/staircase.txt";
+String mdt_pothole_file = "/pothole.txt";
+String mdt_water_file = "/water.txt";
+String mdt_fire_file = "/fire.txt";
+
+String song_obstacle_file = "/obstacle_song.txt";
+String song_staircase_file = "/staircase_song.txt";
+String song_pothole_file = "/pothole_song.txt";
+String song_water_file = "/water_song.txt";
+String song_fire_file = "/fire_song.txt";
+
+String telegram_msg_file = "/telegram_msg.txt";
+String telegram_name_file= "/telegram_name.txt";
+String telegram_chat_id_file= "/telegram_chat_id.txt";
+
+
+
+
+void threshold_setup_log() {
+
+//----------------- OBSTCALE FILE READING --------------------
+  String names_obstacle = "";
+  names_obstacle  = readFile(SPIFFS, mdt_obstacle_file);
+  if (names_obstacle  != "") {
+    mid_distance_threshold_obstacle = names_obstacle.toInt();
+    Serial.println(mid_distance_threshold_obstacle);
+  }
+  String names_song_obstacle = "";
+  names_song_obstacle  = readFile(SPIFFS, song_obstacle_file);
+  if (names_song_obstacle  != "") {
+    song_obstacle = names_song_obstacle;
+    Serial.println(song_obstacle);
+  }
+
+
+//----------------- STAIRCASE FILE READING --------------------
+  String names_staircase = "";
+  names_staircase  = readFile(SPIFFS, mdt_staircase_file);
+  if (names_staircase  != "") {
+    mid_distance_threshold_staircase = names_staircase.toInt();
+    Serial.println(mid_distance_threshold_staircase);
+  }
+  String names_song_staircase= "";
+  names_song_staircase  = readFile(SPIFFS, song_staircase_file);
+  if (names_song_staircase  != "") {
+    song_staircase = names_song_staircase;
+    Serial.println(song_staircase);
+  }
+
+
+//----------------- POTHOLE FILE READING --------------------
+  String names_pothole = "";
+  names_pothole  = readFile(SPIFFS, mdt_pothole_file);
+  if (names_staircase  != "") {
+    mid_distance_threshold_pothole = names_pothole.toInt();
+    Serial.println(mid_distance_threshold_pothole);
+  }
+  String names_song_pothole= "";
+  names_song_pothole  = readFile(SPIFFS, song_pothole_file);
+  if (names_song_pothole  != "") {
+    song_pothole = names_song_pothole;
+    Serial.println(song_pothole);
+  }
+
+
+//----------------- WATER FILE READING --------------------
+  String names_water = "";
+  names_water = readFile(SPIFFS, mdt_water_file);
+  if (names_water != "") {
+    mid_distance_threshold_water  = names_water.toInt();
+    Serial.println(mid_distance_threshold_water);
+  }
+  String names_song_water = "";
+  names_song_water = readFile(SPIFFS, song_water_file);
+  if (names_song_water  != "") {
+    song_water = names_song_water;
+    Serial.println(song_water);
+  }
+
+//----------------- FIRE FILE READING --------------------
+  String names_fire = "";
+  names_fire  = readFile(SPIFFS, mdt_fire_file);
+  if (names_fire != "") {
+    mid_distance_threshold_fire = names_fire.toInt();
+    Serial.println(mid_distance_threshold_fire);
+  }
+  String names_song_fire = "";
+  names_song_fire = readFile(SPIFFS, song_fire_file);
+  if (names_song_fire  != "") {
+    song_fire = names_song_fire;
+    Serial.println(song_fire);
+  }
+
+
+
+//----------------- MESSAGE FILE READING --------------------
+  String names_telegram_msg = "";
+  names_telegram_msg = readFile(SPIFFS, telegram_msg_file);
+  if (names_telegram_msg != "") {
+    msg = names_telegram_msg;
+    Serial.println(msg);
+  }
+  String names_telegram_name = "";
+  names_telegram_name  = readFile(SPIFFS, telegram_name_file);
+  if (names_telegram_name != "") {
+    n = names_telegram_name;
+    Serial.println(n);
+  }
+  String names_telegram_chat_id = "";
+  names_telegram_chat_id = readFile(SPIFFS, telegram_chat_id_file);
+  if (names_telegram_chat_id  != "") {
+    tele_id = names_telegram_chat_id ;
+    Serial.println(tele_id);
+  }
+  
+}
