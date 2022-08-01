@@ -1,4 +1,4 @@
-package com.example.smart_stick;
+package com.example.smart_blind_stick;
 
 import android.os.Bundle;
 import android.view.View;
@@ -62,11 +62,7 @@ public class MainActivity6 extends AppCompatActivity {
         setContentView(R.layout.activity_main6);
 
         TextView t=(TextView)findViewById(R.id.t);
-        Bundle bundle=getIntent().getExtras();
-        String det=bundle.getString("Message");
-        t.setText(t.getText()+" "+det);
-
-
+        String det="Obstacle Detection";
 
 
         config_b1 = findViewById(R.id.config_b1);
@@ -74,6 +70,69 @@ public class MainActivity6 extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
 
+        /*******************************   RETRIVING VALUES  *****************************************/
+
+        String url = "http://192.168.1.2/get_value_obstacles";                                      // --------- IP address --------
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+
+                   final String myResponse = response.body().string();
+
+                    MainActivity6.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            String value = myResponse;
+                            //Toast.makeText(MainActivity6.this, value, Toast.LENGTH_LONG).show();
+
+                            String[] parts = value.split(" ");
+                            String part1 = parts[0].replaceAll("[\\n\t ]", "");;
+                            String part2 = parts[1].replaceAll("[\\n\t ]", "");;
+                            config_e.setText(part1);
+
+                            String val = part2 ;
+                            switch(val){
+                                case "song1":
+                                    RadioButton b1 = (RadioButton) findViewById(R.id.config_s1);
+                                    b1.setChecked(true);
+                                    break;
+                                case "song2":
+                                    RadioButton b2 = (RadioButton) findViewById(R.id.config_s2);
+                                    b2.setChecked(true);
+                                    break;
+                                case "song3":
+                                    RadioButton b3 = (RadioButton) findViewById(R.id.config_s3);
+                                    b3.setChecked(true);
+                                    break;
+                                case "song4":
+                                    RadioButton b4 = (RadioButton) findViewById(R.id.config_s4);
+                                    b4.setChecked(true);
+                                    break;
+                                case "song5":
+                                    RadioButton b5 = (RadioButton) findViewById(R.id.config_s5);
+                                    b5.setChecked(true);
+                                    break;
+                                default:
+                                    Toast.makeText(MainActivity6.this, "Invalid", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+        /*******************************  DETECTING OBSTACLES  *****************************************/
         config_b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +146,8 @@ public class MainActivity6 extends AppCompatActivity {
 
                 Toast.makeText(MainActivity6.this, "\nDetection =" + det + " \nSong =" + song + " \nDistance =" + dis, Toast.LENGTH_SHORT).show();
 
-                String url = "http://192.168.1.6/";
-                String url_song = url + "set_config?";
+                String url = "http://192.168.1.2/";                                                 // --------- IP address --------
+                String url_song = url + "set_config_obstacle?";
 
                 url_song +="detectionId=";
                 url_song += det;
@@ -118,8 +177,7 @@ public class MainActivity6 extends AppCompatActivity {
                             MainActivity6.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //mTextViewResult.setText(myResponse);
-                                    Toast.makeText(MainActivity6.this, "Successfully Connected", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(MainActivity6.this, "Successfully Connected", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
