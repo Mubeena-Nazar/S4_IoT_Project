@@ -1,0 +1,61 @@
+
+//---------------------------- value passing -------------------------------
+
+    server.on("/get_value_pothole", HTTP_GET, [](AsyncWebServerRequest * request) {
+      Serial.println("Got request for Pothole Configuration");
+      request->send_P(200, "text/html", pothole, pothole_processor);
+      //request->send_P(200, "text/html", "pothole");
+    });
+
+//---------------------obstacle configuration settings ---------------------
+
+  server.on("/set_config_pothole", HTTP_GET, [](AsyncWebServerRequest * request) {
+    String song3, detection3, distance_str3;
+    int distance3;
+
+    if (request->hasParam("songId") && request->hasParam("songId")) {
+      detection3 = request->getParam("detectionId")->value();
+      song3 = request->getParam("songId")->value();
+      distance_str3 = request->getParam("distanceId")->value();
+    }
+
+    Serial.println("\n------VALUES PASSED----------" );
+    Serial.println("Detection : " + detection3);
+    Serial.println("Song      : " + song3);
+    Serial.println("Distance : " + distance_str3);
+
+    distance3 = distance_str3.toInt();
+
+
+
+
+    //-------------------DISTANCE CONFIGURATION------------------------
+
+    if (detection3.equals("Pothole Detection")) {
+      mid_distance_threshold_pothole = distance3;
+      writeFileStr(SPIFFS, mdt_pothole_file, String(distance3));   //storage
+      song_pothole=song3;
+      writeFileStr(SPIFFS, song_pothole_file, String(song3));     //storage
+    }
+
+
+    //--------------------SONG CALCULATIONS-------------------------
+    if (song_pothole== "song1") {
+      flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;
+    }
+    if (song_pothole == "song2") {
+      flag1 = 0, flag2 = 1, flag3 = 0, flag4 = 0, flag5 = 0;
+    }
+    if (song_pothole  == "song3") {
+      flag1 = 0, flag2 = 0, flag3 = 1, flag4 = 0, flag5 = 0;
+    }
+    if (song_pothole  == "song4") {
+      flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 1, flag5 = 0;
+    }
+    if (song_pothole  == "song5") {
+      flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 1;
+    }
+
+    request->send_P(200, "text/html",  "ok");
+
+  });
