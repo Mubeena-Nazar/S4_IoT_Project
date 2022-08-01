@@ -1,0 +1,54 @@
+
+//-------------------------  TELEGRAM MSG  -------------------------------------
+  Serial.print("Retrieving time: ");
+  configTime(0, 0, "pool.ntp.org"); // get UTC time via NTP
+  time_t now = time(nullptr);
+  Serial.println(now);
+ 
+  bot.sendMessage(tele_id, "Succesfully Connected", "");
+  //bot.sendMessage(CHAT_ID_Tele, "Succesfully Connected", "");
+
+
+  secured_client.setCACert(TELEGRAM_CERTIFICATE_ROOT);
+  server.begin();
+
+//---------------------------- value passing -------------------------------
+
+    server.on("/get_value_telegram_msg", HTTP_GET, [](AsyncWebServerRequest * request) {
+      Serial.println("Got request for Message Configuration");
+      request->send_P(200, "text/html",telegram_msg ,telegram_msg_processor );
+    });
+    
+//--------------------- TELEGRAM configuration settings -----------------------
+
+  server.on("/set_msg_config", HTTP_GET, [](AsyncWebServerRequest * request) {
+  String n1,msg1,tele_id1;
+
+    if (request->hasParam("Msg_Id") && request->hasParam("Msg_Id")) {
+      n1 = request->getParam("Name_Id")->value();
+      msg1 = request->getParam("Msg_Id")->value();
+      tele_id1 = request->getParam("Num_Id")->value();
+    }
+
+    Serial.println("\n----------- VALUES PASSED ------------" );
+    Serial.println("Name       : " + n1);
+    Serial.println("Message    : " + msg1);
+    Serial.println("TelegramId : " + tele_id1);
+
+    //tele_id = tele_id1.toInt();
+    msg=msg1;
+    writeFileStr(SPIFFS, telegram_msg_file, String(msg1));  //storage
+    n=n1;
+    writeFileStr(SPIFFS, telegram_name_file, String(n1));  //storage
+    tele_id = tele_id1;
+    writeFileStr(SPIFFS, telegram_chat_id_file, String(tele_id1));  //storage
+
+
+    Serial.println("\n----------- CURRENT VALUES ------------" );
+    Serial.println("Name       : " + n);
+    Serial.println("Message    : " + msg);
+    Serial.println("TelegramId : " + tele_id);
+  });
+
+}
+  
