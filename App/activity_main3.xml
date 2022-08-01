@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     android:foregroundTint="#03A9F4"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity3"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
         android:text="Emergency Contact"
+        android:textColor="#C12222"
         android:textSize="35dp" />
 
     <ImageView
@@ -21,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/idea8" />
+        app:srcCompat="@drawable/idea3" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -31,18 +36,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name : "
+                android:text="Name            : "
                 android:textColor="@color/purple_700"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/emg_e1"
+                android:textColor="@color/purple_700"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -55,50 +61,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Number :"
+                android:text="Telegram Id :"
                 android:textColor="@color/purple_700"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/emg_e2"
+                android:textColor="@color/purple_700"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="987654321" />
+                android:text="1304506150" />
 
         </TableRow>
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Message :"
+                android:text="Message      :"
                 android:textColor="@color/purple_700"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/emg_e3"
+                android:textColor="@color/purple_700"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="I am in need of help .... " />
+                android:textSize="15dp"
+                android:text="" />
 
         </TableRow>
     </TableLayout>
     <Button
         android:id="@+id/emg_b1"
         android:layout_margin="35dp"
+        android:textColor="@color/white"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
