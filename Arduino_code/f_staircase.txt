@@ -1,0 +1,61 @@
+
+//---------------------------- value passing -------------------------------
+
+    server.on("/get_value_staircase", HTTP_GET, [](AsyncWebServerRequest * request) {
+      Serial.println("Got request for Staircase Configuration");
+      request->send_P(200, "text/html", staircase, staircase_processor);
+      //request->send_P(200, "text/html", "staircase");
+    });
+
+//---------------------obstacle configuration settings ---------------------
+
+  server.on("/set_config_staircase", HTTP_GET, [](AsyncWebServerRequest * request) {
+    String song2, detection2, distance_str2;
+    int distance2;
+
+    if (request->hasParam("songId") && request->hasParam("songId")) {
+      detection2 = request->getParam("detectionId")->value();
+      song2 = request->getParam("songId")->value();
+      distance_str2 = request->getParam("distanceId")->value();
+    }
+
+    Serial.println("\n------VALUES PASSED----------" );
+    Serial.println("Detection : " + detection2);
+    Serial.println("Song      : " + song2);
+    Serial.println("Distance : " + distance_str2);
+
+    distance2 = distance_str2.toInt();
+
+
+
+
+    //-------------------DISTANCE CONFIGURATION------------------------
+
+    if (detection2.equals("Staircase Detection")) {
+      mid_distance_threshold_staircase = distance2;
+      writeFileStr(SPIFFS, mdt_staircase_file, String(distance2));   //storage
+      song_staircase=song2;
+      writeFileStr(SPIFFS, song_staircase_file, String(song2));     //storage
+    }
+
+
+    //--------------------SONG CALCULATIONS-------------------------
+    if (song_staircase == "song1") {
+      flag1 = 1, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;
+    }
+    if (song_staircase  == "song2") {
+      flag1 = 0, flag2 = 1, flag3 = 0, flag4 = 0, flag5 = 0;
+    }
+    if (song_staircase  == "song3") {
+      flag1 = 0, flag2 = 0, flag3 = 1, flag4 = 0, flag5 = 0;
+    }
+    if (song_staircase  == "song4") {
+      flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 1, flag5 = 0;
+    }
+    if (song_staircase  == "song5") {
+      flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 1;
+    }
+
+    request->send_P(200, "text/html",  "ok");
+
+  });
