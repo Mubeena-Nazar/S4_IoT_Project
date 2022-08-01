@@ -1,4 +1,4 @@
-package com.example.smart_stick;
+package com.example.smart_blind_stick;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,31 +28,26 @@ public class MainActivity4 extends AppCompatActivity {
             case R.id.config_r1:
                 if (selected) {
                     det = "Obstacle Detection";
-                    Toast.makeText(this, " Obstacle Detection Selected", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.config_r2:
                 if (selected) {
                     det = "Staircase Detection";
-                    Toast.makeText(this, "Staircase Detection selected", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.config_r3:
                 if (selected) {
                     det = "Pothole Detection";
-                    Toast.makeText(this, "Pothole Detection selected", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.config_r4:
                 if (selected) {
                     det = "Water Detection";
-                    Toast.makeText(this, "Water Detection selected", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.config_r5:
                 if (selected) {
                     det = "Fire Detection";
-                    Toast.makeText(this, "Fire Detection selected", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -67,11 +62,30 @@ public class MainActivity4 extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MainActivity4.this,MainActivity6.class);
-                i.putExtra("Message",det);
-                startActivity(i);
+                if( det== "Obstacle Detection"){
+                    Intent i_obstacle=new Intent(MainActivity4.this,MainActivity6.class);
+                    startActivity(i_obstacle);
+                }
+                if( det== "Staircase Detection"){
+                    Intent i_staircase=new Intent(MainActivity4.this,MainActivity7.class);
+                    startActivity(i_staircase);
+                }
+                if( det== "Pothole Detection"){
+                    Intent i_pothole=new Intent(MainActivity4.this,MainActivity8.class);
+                    startActivity(i_pothole);
+                }
+                if( det== "Water Detection"){
+                    Intent i_water=new Intent(MainActivity4.this,MainActivity9.class);
+                    startActivity(i_water);
+                }
+                if( det== "Fire Detection"){
+                    Intent i_fire=new Intent(MainActivity4.this,MainActivity10.class);
+                    startActivity(i_fire);
+                }
             }
         });
+
+
 
     }
 }
