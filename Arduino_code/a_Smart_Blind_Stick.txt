@@ -1,0 +1,179 @@
+#include <WiFi.h>
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <WiFiClientSecure.h>
+#include <UniversalTelegramBot.h>
+#include <ArduinoJson.h>
+#include "SPIFFS.h"
+
+
+//#define WIFI_SSID "Nokanda Unni Ithu Njan Alla"
+//#define WIFI_PASSWORD "thankyouchinnu"
+#define WIFI_SSID "Fiber Connection"
+#define WIFI_PASSWORD "Siyadar5"
+//#define WIFI_SSID "projectlab"
+//#define WIFI_PASSWORD "project@123"
+
+
+#define BOT_TOKEN "5331694406:AAG-mEcOClVekPk2GB8BOGfZPnJXe_vVAEo"
+#define CHAT_ID_Tele "1304506150"
+#define SOUND_SPEED 0.034
+
+
+
+// FILE OPERATINS FOR STORAGE
+void logfile_setup();
+void listDir(fs::FS &fs, const char * dirname, uint8_t levels);
+void writeFileStr(fs::FS &fs, String path, String text);
+String readFile(fs::FS &fs, String path);
+
+
+
+
+//PIN NUMBERS and DEFINE CONSTANTS 
+int LED_BUILTIN = 2;
+const int trigPin_1 = 5;
+const int echoPin_1 = 19;
+const int trigPin_2 = 4;
+const int echoPin_2 = 18;
+const int trigPin_3 = 15;
+const int echoPin_3 = 21;
+const int moisture_sensor_pin = 34;
+int moisture_sensor_value = 0;
+const int gas_sensor_pin = 35;
+int gas_sensor_value = 0;
+int mid_distance_threshold_obstacle = 15;
+int mid_distance_threshold_staircase = 15;
+int mid_distance_threshold_pothole = 15;
+int mid_distance_threshold_water = 3600;
+int mid_distance_threshold_fire = 400;
+String song_obstacle="song1";
+String song_staircase="song2";
+String song_pothole="song3";
+String song_water="song4";
+String song_fire="song5";
+
+
+
+
+
+//DEFINE SOUND SPEED IN cm/s
+long duration1, duration2, duration3;
+long distance1, distance2, distance3;
+float distanceCm1, distanceCm2, distanceCm3;
+float distanceInch1, distanceInch2, distanceInch3;
+int flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;
+
+
+
+
+
+
+//HTTP REQUEST
+AsyncWebServer server(80);
+const char index_html[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+String processor(const String& var){
+  if(var == "BUTTONPLACEHOLDER"){
+    String buttons = "<h2>ok</h2>";
+    return buttons;
+  }
+  return String();
+}
+const char obstacles[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+const char staircase[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+const char pothole[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+const char water[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+const char fire[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+const char telegram_msg[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+const char telegram_name[] PROGMEM = R"rawliteral(
+%BUTTONPLACEHOLDER%
+)rawliteral";
+//const char telegram_chat_id[] PROGMEM = R"rawliteral(
+//%BUTTONPLACEHOLDER%
+//)rawliteral";
+
+
+
+//TELEGRAM MESSAGE 
+WiFiClientSecure secured_client;
+UniversalTelegramBot bot(BOT_TOKEN, secured_client);
+
+
+String msg = "I am in need of Help";
+String n="User Contact";
+String tele_id = CHAT_ID_Tele;
+
+long previousMillisTelegram = 0;
+const int BUTTON = 23;
+int BUTTONstate = 0;
+void handleNewMessages(int numNewMessages) {
+  Serial.println("handleNewMessages");
+  Serial.println(String(numNewMessages));
+  for (int i = 0; i < numNewMessages; i++)  {
+    String chat_id = bot.messages[i].chat_id;
+    String text = bot.messages[i].text;
+    if (text == "/start")    {
+      String reply = "Telegram Get Chat ID: " + chat_id + "\n";
+      reply += "/getid - Chat ID\n";
+      reply += "/location - Get Current Location\n";
+      reply += "/reset - Reset Distance to 9\n";
+      bot.sendMessage(chat_id, reply);
+    }
+    if (text == "/getid") {
+      String reply = "Your Chat ID: " + chat_id + "\n";
+      bot.sendMessage(chat_id, reply);
+    }
+    if (text == "/location") {
+      String reply = "Location\n";
+      reply += "Latitude: 1.12345\n";
+      reply += "Longitude: 124.122315\n";
+      bot.sendMessage(chat_id, reply);
+    }
+    if (text == "/reset") {
+      String reply = "Resetting...\n";
+      bot.sendMessage(chat_id, reply);
+    }
+
+  }
+}
+void buttonPressed() {
+  Serial.println("Telegram Message Sending");
+  String reply = msg;
+  
+  //bot.sendMessage(CHAT_ID_Tele, reply);
+  bot.sendMessage(tele_id, reply);
+  Serial.println("Telegram Message Sent");
+  //reply += "Lat:" + Latitude + "\n";
+  //reply += "Lon:" + Longitude + "\n";
+
+}
+
+
+
+
+
+
+
+
+//--------------- static IP ADDRESS -------------
+//IPAddress local_IP(192, 168, 1, 160);
+//// Set your Gateway IP address
+//IPAddress gateway(192, 168, 1, 1);
+//
+//IPAddress subnet(255, 255, 0, 0);
+//IPAddress primaryDNS(8, 8, 8, 8);   //optional
+//IPAddress secondaryDNS(8, 8, 4, 4); //optional
