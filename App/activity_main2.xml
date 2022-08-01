@@ -4,14 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foregroundTint="#03A9F4"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="#C12222"
         android:text="Settings"
         android:textSize="50dp" />
 
@@ -20,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
         android:layout_height="300dp"
-        app:srcCompat="@drawable/idea13" />
+        app:srcCompat="@drawable/idea2" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -43,6 +48,7 @@
 
             <Button
                 android:id="@+id/set_b1"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -66,6 +72,7 @@
 
             <Button
                 android:id="@+id/set_b2"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
