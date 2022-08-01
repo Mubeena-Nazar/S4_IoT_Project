@@ -7,39 +7,33 @@
     android:layout_marginLeft="5dp"
     android:foregroundTint="#03A9F4"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".MainActivity6"
     android:background="@color/white">
 
 
     <TextView
+        android:id="@+id/t"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content"       android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="5dp"
-        android:gravity="center_horizontal"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
         android:textColor="#C12222"
-        android:text="Configuration"
-        android:textSize="25dp"
-        android:textStyle="bold"/>
+        android:text="Obstacle Detection"
+        android:textSize="25dp"/>
 
     <ImageView
         android:id="@+id/config_img_1"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/idea9" />
-
-    <TextView
-        android:id="@+id/t"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Let's set the configurations for "
-        android:layout_margin="20dp"/>
+        app:srcCompat="@drawable/idea6" />
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
+        android:layout_marginLeft="20dp"
         android:layout_gravity="center_horizontal">
 
         <TableRow
@@ -128,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="70dp"
                 android:ems="7"
-                android:text="10"
+                android:text=""
                 android:textColor="@color/purple_700"
                 android:textSize="15dp" />
 
