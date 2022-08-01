@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:foregroundTint="#03A9F4"
+    android:orientation="vertical"
+    tools:context=".MainActivity7"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/t"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="#C12222"
+        android:text="Staircase Detection"
+        android:textSize="25dp"/>
+
+    <ImageView
+        android:id="@+id/config_img_1"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/idea7" />
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Sound  "
+                android:textColor="@color/purple_700"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="MissingConstraints">
+
+                <RadioButton
+                    android:id="@+id/config_s1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="radioHandle"
+                    android:text="Song 1 "
+                    android:textColor="@color/purple_700"
+                    android:textSize="12dp" />
+
+                <RadioButton
+                    android:id="@+id/config_s2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Song 2 "
+                    android:textColor="@color/purple_700"
+                    android:textSize="12dp" />
+
+                <RadioButton
+                    android:id="@+id/config_s3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Song 3 "
+                    android:textColor="@color/purple_700"
+                    android:textSize="12dp" />
+
+
+                <RadioButton
+                    android:id="@+id/config_s4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Song 4 "
+                    android:textColor="@color/purple_700"
+                    android:textSize="12dp" />
+
+                <RadioButton
+                    android:id="@+id/config_s5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioHandle"
+                    android:text="Song 5 "
+                    android:textColor="@color/purple_700"
+                    android:textSize="12dp" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:text="Distance (in cm) "
+                android:textColor="@color/purple_700"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/config_e"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:ems="7"
+                android:text="10"
+                android:textColor="@color/purple_700"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/config_b1"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="CONFIRM"
+                android:textSize="12dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</LinearLayout>
