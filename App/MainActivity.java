@@ -1,5 +1,4 @@
-package com.example.smart_stick;
-
+package com.example.smart_blind_stick;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         main_b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, " NEXT ", Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(MainActivity.this,MainActivity2.class);
                 startActivity(i);
             }
@@ -31,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         main_b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, " find now ", Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(MainActivity.this,MainActivity5.class);
+                Intent i=new Intent(MainActivity.this, com.example.smart_blind_stick.MainActivity5.class);
                 startActivity(i);
             }
         });
